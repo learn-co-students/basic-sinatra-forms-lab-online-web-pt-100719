@@ -5,14 +5,10 @@ class App < Sinatra::Base
     erb :newteam
   end
 
-  post "/team" do
-    @name = params["name"]
-    @coach = params["coach"]
-    @pg = params["pg"]
-    @sg = params["sg"]
-    @pf = params["pf"]
-    @sf = params["sf"]
-    @c = params["c"]
+  post '/team' do
+    params.each do |key, value|
+      self.instance_variable_set("@#{key}", value)
+    end
     erb :team
   end
 end
